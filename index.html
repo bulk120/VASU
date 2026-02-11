@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VASU · HikeLetter Sales</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter clean & modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafbfc;
+            color: #1a2634;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            border-bottom: 1px solid #eaeef2;
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+            background: rgba(255,255,255,0.96);
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-area {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        .brand-name {
+            font-weight: 700;
+            font-size: 1.9rem;
+            letter-spacing: -0.02em;
+            color: #0b2b40;
+        }
+        .brand-tag {
+            background: #e6f0f3;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1c6c7c;
+            border: 1px solid #bdd3da;
+            cursor: pointer;
+        }
+        nav {
+            display: flex;
+            gap: 2.2rem;
+        }
+        nav a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2e4b5a;
+            font-size: 1.05rem;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+            cursor: pointer;
+        }
+        nav a:hover {
+            color: #0e6b7c;
+            border-bottom-color: #1f9eb5;
+        }
+        nav a.active {
+            color: #0c5e6b;
+            border-bottom-color: #0c5e6b;
+            font-weight: 600;
+        }
+        .main-content {
+            flex: 1;
+            padding: 3.2rem 0 4rem;
+        }
+        .hero-card {
+            background: linear-gradient(145deg, #ffffff, #f4f9fb);
+            border-radius: 36px;
+            padding: 3.2rem 3rem;
+            box-shadow: 0 12px 30px rgba(0,40,50,0.05);
+            border: 1px solid #deedf0;
+            margin-bottom: 3rem;
+        }
+        .hero-name {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #0b2b40;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        .hero-role {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #3c6e7a;
+            margin-top: 0.5rem;
+            margin-bottom: 1.8rem;
+        }
+        .contact-badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2.2rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            border: 1px solid #d6e4e9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+            font-size: 1.2rem;
+        }
+        .contact-item i {
+            font-size: 1.7rem;
+            color: #1c7c8c;
+            width: 1.8rem;
+            text-align: center;
+        }
+        .contact-item a {
+            font-weight: 600;
+            color: #144a55;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        .contact-item a:hover {
+            color: #0e2e36;
+            text-decoration: underline;
+        }
+        .divider {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #b6d8df, transparent);
+            margin: 2.8rem 0 2rem;
+        }
+        .page-card {
+            background: white;
+            border-radius: 28px;
+            padding: 2.8rem 3rem;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.02);
+            border: 1px solid #ecf3f5;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 650;
+            color: #0b3b44;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.01em;
+        }
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1b5c67;
+            margin: 2rem 0 0.8rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #25606b;
+            margin-top: 1.6rem;
+            margin-bottom: 0.4rem;
+        }
+        p {
+            margin-bottom: 1.1rem;
+            color: #2e424a;
+        }
+        .policy-list, .terms-list {
+            list-style: none;
+        }
+        .policy-list li, .terms-list li {
+            margin-bottom: 0.9rem;
+            padding-left: 1.7rem;
+            position: relative;
+        }
+        .policy-list li:before, .terms-list li:before {
+            content: "▹";
+            color: #1f9eb5;
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+        }
+        .footer {
+            background: white;
+            border-top: 1px solid #e0ebef;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            color: #3f5e66;
+        }
+        .footer-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+        .copyright {
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #3e6a73;
+        }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .footer-links a {
+            text-decoration: none;
+            color: #2f6a76;
+            font-weight: 500;
+            font-size: 0.98rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .footer-links a:hover {
+            color: #033b46;
+        }
+        .contact-detail-block {
+            background: #f3f8fa;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+        .contact-detail-row {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            font-size: 1.3rem;
+            padding: 1.2rem 1rem;
+            border-bottom: 1px solid #d3e4e9;
+        }
+        .contact-detail-row:last-child {
+            border-bottom: none;
+        }
+        .contact-detail-row i {
+            width: 2.2rem;
+            color: #0f6f7c;
+            font-size: 1.8rem;
+        }
+        .page {
+            display: none;
+        }
+        .page.active-page {
+            display: block;
+        }
+        .attribution {
+            margin-top: 2.2rem;
+            font-size: 0.9rem;
+            color: #6f949c;
+            text-align: right;
+            border-top: 1px dashed #c2d6db;
+            padding-top: 1.5rem;
+        }
+        .call-btn, .email-btn {
+            background: #1a7f8c;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .call-btn:hover, .email-btn:hover {
+            background: #0e5f6b;
+        }
+        @media (max-width: 700px) {
+            .wrapper { padding: 0 1.2rem; }
+            .header-flex { flex-direction: column; gap: 1rem; }
+            nav { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+            .hero-name { font-size: 2.8rem; }
+            .hero-card { padding: 2rem 1.5rem; }
+            .contact-badge-grid { flex-direction: column; gap: 1rem; }
+            .contact-item { width: 100%; }
+            .page-card { padding: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="wrapper header-flex">
+            <div class="logo-area" id="home-logo">
+                <span class="brand-name">VASU</span>
+                <span class="brand-tag">HikeLetter</span>
+            </div>
+            <nav>
+                <a class="nav-link active" data-page="home">Home</a>
+                <a class="nav-link" data-page="contact">Contact</a>
+                <a class="nav-link" data-page="privacy">Privacy</a>
+                <a class="nav-link" data-page="terms">Terms</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="wrapper main-content">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active-page">
+            <div class="hero-card">
+                <div class="hero-name">VASU</div>
+                <div class="hero-role">Sales · HikeLetter</div>
+                <div class="contact-badge-grid">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:9381912361">9381912361</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:sales@hikeletter.com">sales@hikeletter.com</a>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-size: 1.2rem; color: #2a5c66;">
+                    <i class="fas fa-bolt" style="color: #1c9eb3;"></i> Official sales contact — reach out for partnerships, inquiries & support
+                </p>
+            </div>
+            <div class="page-card">
+                <h2><i class="fas fa-briefcase" style="color: #1c7c8c; margin-right: 10px;"></i> Vasu @ HikeLetter</h2>
+                <p style="font-size: 1.2rem; font-weight: 400;">Dedicated sales representative. Fast response, business hours. Based in India.</p>
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.8rem;">
+                    <span style="background: #e0f0f3; padding: 0.4rem 1.2rem; border-radius: 30px;">
+                        <i class="fas fa-check-circle" style="color: #1c7c8c;"></i> Verified contact
+                    </span>
+                    <span style="background: #e0f0f3; padding: 0.4rem 1.2rem; border-radius: 30px;">
+                        <i class="fas fa-clock"></i> Reply within 4 hrs
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact" class="page">
+            <div class="page-card">
+                <h1><i class="fas fa-address-card" style="color: #1c7c8c; margin-right: 12px;"></i> Contact VASU</h1>
+                <p style="font-size: 1.2rem;">Reach out directly — sales & general inquiries.</p>
+                <div class="contact-detail-block">
+                    <div class="contact-detail-row">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div style="flex:1;">
+                            <div style="font-weight: 700; font-size: 1.5rem; color: #144a55;">9381912361</div>
+                            <span style="font-size: 1rem; color: #3d727d;">
+                                <i class="fas fa-check-circle" style="color: #2496a8;"></i> Mobile / WhatsApp
+                            </span>
+                        </div>
+                        <a href="tel:9381912361" class="call-btn">
+                            <i class="fas fa-phone"></i> Call
+                        </a>
+                    </div>
+                    <div class="contact-detail-row">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <div style="flex:1;">
+                            <div style="font-weight: 700; font-size: 1.5rem; color: #144a55;">sales@hikeletter.com</div>
+                            <span style="font-size: 1rem; color: #3d727d;">Official sales email</span>
+                        </div>
+                        <a href="mailto:sales@hikeletter.com" class="email-btn">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+                <div style="background: #f2f5f6; border-radius: 20px; padding: 1.8rem; margin-top: 2rem;">
+                    <i class="fas fa-building" style="color: #1f7a88;"></i> 
+                    <strong>HikeLetter</strong> — Vasu handles corporate sales, bulk inquiries, and partnership opportunities.
+                    <div style="margin-top: 0.8rem;">📍 India (IST, GMT+5:30)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRIVACY POLICY PAGE -->
+        <div id="privacy" class="page">
+            <div class="page-card">
+                <h1><i class="fas fa-shield-alt" style="color: #1c7c8c;"></i> Privacy Policy</h1>
+                <p><strong>Effective date:</strong> January 2025</p>
+                <p>VASU ("we", "I", "me") operates the sales contact line and email sales@hikeletter.com. This page informs you of policies regarding collection, use, and disclosure of personal data when you contact VASU.</p>
+                
+                <h2>1. Information Collection</h2>
+                <ul class="policy-list">
+                    <li><strong>Contact details:</strong> phone number, email address, name and any information you provide in messages.</li>
+                    <li><strong>Usage data:</strong> may include timestamps, IP address when you visit this website (anonymized).</li>
+                    <li>No cookies or tracking are used except essential logs.</li>
+                </ul>
+                
+                <h2>2. Use of Data</h2>
+                <ul class="policy-list">
+                    <li>To respond to your sales inquiries and provide support for HikeLetter products.</li>
+                    <li>To maintain a professional communication record.</li>
+                    <li>We do <strong>not</strong> sell or share your data with third parties for marketing.</li>
+                </ul>
+                
+                <h2>3. Data Retention</h2>
+                <p>Your contact information and correspondence are retained as long as necessary to fulfill the purposes outlined, or as required by law. If you wish to request deletion, please contact us directly.</p>
+                
+                <h2>4. Your Rights</h2>
+                <p>You have the right to access, correct, or delete your personal data held by us. To exercise these rights, please reach out via the contact page.</p>
+                
+                <h2>5. Changes</h2>
+                <p>This policy may be updated occasionally. The latest version will always be posted here.</p>
+                <div class="attribution">VASU · HikeLetter sales</div>
+            </div>
+        </div>
+
+        <!-- TERMS AND CONDITIONS PAGE -->
+        <div id="terms" class="page">
+            <div class="page-card">
+                <h1><i class="fas fa-file-contract" style="color: #1c7c8c;"></i> Terms & Conditions</h1>
+                <p>By contacting VASU or using the sales email/phone, you agree to the following terms.</p>
+                
+                <h2>1. Sales & Inquiries</h2>
+                <ul class="terms-list">
+                    <li>All communication is for legitimate business purposes regarding HikeLetter services.</li>
+                    <li>Quotes, prices, and offers are non-binding until confirmed in writing.</li>
+                </ul>
+                
+                <h2>2. Accuracy</h2>
+                <ul class="terms-list">
+                    <li>You agree to provide accurate contact information when making inquiries.</li>
+                    <li>VASU is not liable for misdirected messages due to incorrect details.</li>
+                </ul>
+                
+                <h2>3. Intellectual Property</h2>
+                <ul class="terms-list">
+                    <li>Any materials shared (brochures, pricing) remain the property of HikeLetter / VASU.</li>
+                    <li>You may not redistribute commercial information without consent.</li>
+                </ul>
+                
+                <h2>4. Limitation of Liability</h2>
+                <p>In no event shall VASU be liable for any indirect, incidental, or consequential damages arising out of the use of this contact page or delay in response.</p>
+                
+                <h2>5. Governing Law</h2>
+                <p>These terms are governed by the laws of India, without regard to conflict of law provisions.</p>
+                
+                <h2>6. Changes</h2>
+                <p>We reserve the right to modify these terms. Continued engagement implies acceptance of the latest version.</p>
+                <p style="margin-top: 2rem;"><i class="fas fa-handshake" style="color: #1f9eb5;"></i> For any clarification, contact VASU directly.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrapper footer-flex">
+            <div class="copyright">
+                <i class="far fa-copyright"></i> <span id="current-year"></span> VASU — sales representative for HikeLetter. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a class="footer-nav-link" data-page="privacy">Privacy</a>
+                <a class="footer-nav-link" data-page="terms">Terms</a>
+                <a class="footer-nav-link" data-page="contact">Contact</a>
+            </div>
+        </div>
+        <div class="wrapper" style="margin-top: 0.8rem; font-size: 0.9rem; color: #628e97;">
+            <span><i class="fas fa-phone"></i> 9381912361  ·  <i class="fas fa-envelope"></i> sales@hikeletter.com</span>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            "use strict";
+            
+            // Set copyright year
+            document.getElementById('current-year').innerText = new Date().getFullYear();
+            
+            // Get all pages
+            const pages = {
+                home: document.getElementById('home'),
+                contact: document.getElementById('contact'),
+                privacy: document.getElementById('privacy'),
+                terms: document.getElementById('terms')
+            };
+            
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            const footerNavLinks = document.querySelectorAll('.footer-nav-link');
+            const homeLogo = document.getElementById('home-logo');
+            
+            // Function to switch pages
+            function activatePage(pageId) {
+                // Hide all pages
+                Object.values(pages).forEach(page => {
+                    if (page) page.classList.remove('active-page');
+                });
+                
+                // Show selected page
+                if (pages[pageId]) {
+                    pages[pageId].classList.add('active-page');
+                }
+                
+                // Update active state in header navigation
+                navLinks.forEach(link => {
+                    const dataPage = link.getAttribute('data-page');
+                    if (dataPage === pageId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Add click listeners to header navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    if (pageId) activatePage(pageId);
+                });
+            });
+            
+            // Add click listeners to footer navigation
+            footerNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    if (pageId) activatePage(pageId);
+                });
+            });
+            
+            // Add click listener to logo area (home)
+            if (homeLogo) {
+                homeLogo.addEventListener('click', function() {
+                    activatePage('home');
+                });
+            }
+            
+            // Make sure phone and email links work properly
+            // All tel: and mailto: links work natively
+            
+            // Initial active state check - ensure home is active on page load
+            const currentHash = window.location.hash.substring(1);
+            if (currentHash && pages[currentHash]) {
+                activatePage(currentHash);
+            } else {
+                activatePage('home');
+            }
+        })();
+    </script>
+</body>
+</html>
