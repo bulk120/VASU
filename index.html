@@ -3,42 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VASU · HikeLetter Sales</title>
+    <title>VASU | Luxury Real Estate</title>
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Inter clean & modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter + Playfair Display for elegance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- AOS (Animate on Scroll) Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
+        /* ---------- MODERN REAL ESTATE STYLING — LUXURY, DARK, ANIMATED ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #fafbfc;
-            color: #1a2634;
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0f1c;
+            color: #eaeef2;
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
         }
         .wrapper {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             width: 100%;
         }
+        /* ----- GLASS NAVIGATION ----- */
         header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-            border-bottom: 1px solid #eaeef2;
-            padding: 1.2rem 0;
             position: sticky;
             top: 0;
-            z-index: 10;
-            backdrop-filter: blur(4px);
-            background: rgba(255,255,255,0.96);
+            z-index: 100;
+            background: rgba(10, 15, 28, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(200, 230, 240, 0.08);
+            padding: 1.2rem 0;
         }
         .header-flex {
             display: flex;
@@ -48,261 +58,345 @@
         .logo-area {
             display: flex;
             align-items: baseline;
-            gap: 0.5rem;
+            gap: 0.6rem;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .logo-area:hover {
+            opacity: 0.85;
+            transform: scale(0.98);
         }
         .brand-name {
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 1.9rem;
+            font-size: 2.1rem;
+            background: linear-gradient(135deg, #f6e7d0, #c8a87b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: -0.02em;
-            color: #0b2b40;
         }
         .brand-tag {
-            background: #e6f0f3;
-            padding: 0.2rem 0.8rem;
+            background: rgba(200, 168, 123, 0.15);
+            padding: 0.25rem 1rem;
             border-radius: 40px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            color: #1c6c7c;
-            border: 1px solid #bdd3da;
-            cursor: pointer;
+            color: #d8bf9a;
+            border: 1px solid rgba(200, 168, 123, 0.3);
+            backdrop-filter: blur(4px);
         }
         nav {
             display: flex;
-            gap: 2.2rem;
+            gap: 2.8rem;
         }
-        nav a {
-            text-decoration: none;
+        .nav-link {
             font-weight: 500;
-            color: #2e4b5a;
+            color: #cbd5e1;
             font-size: 1.05rem;
-            transition: 0.2s;
+            transition: 0.25s;
             border-bottom: 2px solid transparent;
-            padding-bottom: 0.25rem;
+            padding-bottom: 0.3rem;
             cursor: pointer;
+            letter-spacing: 0.3px;
         }
-        nav a:hover {
-            color: #0e6b7c;
-            border-bottom-color: #1f9eb5;
+        .nav-link:hover {
+            color: #e4d5bc;
+            border-bottom-color: #c8a87b;
         }
-        nav a.active {
-            color: #0c5e6b;
-            border-bottom-color: #0c5e6b;
+        .nav-link.active {
+            color: #f0e2cf;
+            border-bottom-color: #c8a87b;
             font-weight: 600;
         }
-        .main-content {
-            flex: 1;
-            padding: 3.2rem 0 4rem;
+        /* ----- PAGES ----- */
+        .page {
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
         }
-        .hero-card {
-            background: linear-gradient(145deg, #ffffff, #f4f9fb);
-            border-radius: 36px;
-            padding: 3.2rem 3rem;
-            box-shadow: 0 12px 30px rgba(0,40,50,0.05);
-            border: 1px solid #deedf0;
-            margin-bottom: 3rem;
+        .page.active-page {
+            display: block;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        /* ----- HERO SECTION — FULL WIDTH ELEGANCE ----- */
+        .hero-realestate {
+            position: relative;
+            background: radial-gradient(circle at 10% 30%, #1e2636, #0a0f1c 80%);
+            border-radius: 2.5rem;
+            padding: 4rem 3.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(200, 168, 123, 0.2);
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        .hero-realestate::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200,168,123,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .hero-realestate > * {
+            position: relative;
+            z-index: 2;
         }
         .hero-name {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 700;
-            color: #0b2b40;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+            color: #f7efe5;
+            line-height: 1;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         .hero-role {
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: #3c6e7a;
+            font-size: 2rem;
+            font-weight: 300;
+            color: #e1cfb3;
             margin-top: 0.5rem;
+            margin-bottom: 2rem;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .estate-badge {
+            display: inline-block;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,215,140,0.4);
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            color: #ffebcd;
+            font-weight: 500;
             margin-bottom: 1.8rem;
         }
-        .contact-badge-grid {
+        .contact-grid-hero {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
-            margin-top: 2.2rem;
+            gap: 2.2rem;
+            margin-top: 2.8rem;
         }
-        .contact-item {
+        .hero-contact-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            background: white;
-            padding: 0.8rem 1.8rem;
+            gap: 1.2rem;
+            background: rgba(20, 28, 40, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 0.9rem 2rem;
             border-radius: 60px;
-            border: 1px solid #d6e4e9;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-            font-size: 1.2rem;
+            border: 1px solid rgba(200, 168, 123, 0.3);
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-        .contact-item i {
-            font-size: 1.7rem;
-            color: #1c7c8c;
-            width: 1.8rem;
-            text-align: center;
+        .hero-contact-item:hover {
+            border-color: #c8a87b;
+            background: rgba(30, 40, 55, 0.9);
+            transform: translateY(-3px);
         }
-        .contact-item a {
+        .hero-contact-item i {
+            font-size: 1.8rem;
+            color: #d8bf9a;
+        }
+        .hero-contact-item a, .hero-contact-item span {
             font-weight: 600;
-            color: #144a55;
+            color: #f2e6d9;
             text-decoration: none;
             font-size: 1.2rem;
         }
-        .contact-item a:hover {
-            color: #0e2e36;
-            text-decoration: underline;
+        .hero-contact-item a:hover {
+            color: #ffe1b3;
         }
-        .divider {
-            border: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #b6d8df, transparent);
-            margin: 2.8rem 0 2rem;
+        .address-block {
+            margin-top: 2.2rem;
+            background: rgba(16, 22, 34, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 1.6rem 2rem;
+            border-radius: 24px;
+            border-left: 6px solid #c8a87b;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
+        .address-block i {
+            font-size: 2rem;
+            color: #c8a87b;
+        }
+        .address-text {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #e3d6c5;
+            line-height: 1.5;
+            letter-spacing: 0.3px;
+        }
+        /* ----- CARD STYLES — LUXURY GLASSMORPHISM ----- */
         .page-card {
-            background: white;
-            border-radius: 28px;
-            padding: 2.8rem 3rem;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.02);
-            border: 1px solid #ecf3f5;
+            background: rgba(18, 25, 36, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 3rem 3rem;
+            border: 1px solid rgba(200, 168, 123, 0.18);
+            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        .page-card:hover {
+            border-color: rgba(200, 168, 123, 0.3);
+            box-shadow: 0 25px 45px -10px #00000066;
         }
         h1 {
-            font-size: 2.2rem;
-            font-weight: 650;
-            color: #0b3b44;
-            margin-bottom: 1.2rem;
-            letter-spacing: -0.01em;
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f2e6d9, #d4bc9a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
         }
         h2 {
-            font-size: 1.6rem;
+            font-size: 2rem;
+            color: #eadbc5;
+            margin: 2rem 0 1rem;
             font-weight: 600;
-            color: #1b5c67;
-            margin: 2rem 0 0.8rem;
         }
-        h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #25606b;
-            margin-top: 1.6rem;
-            margin-bottom: 0.4rem;
+        .estate-highlight {
+            color: #d8bf9a;
+            border-bottom: 1px solid #c8a87b80;
+            padding-bottom: 0.5rem;
         }
-        p {
-            margin-bottom: 1.1rem;
-            color: #2e424a;
+        /* ----- CONTACT PAGE SPECIFIC ----- */
+        .contact-luxury {
+            background: linear-gradient(145deg, #111b26, #0c121c);
         }
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid rgba(200,168,123,0.15);
+            transition: 0.2s;
+        }
+        .detail-row:hover {
+            background: rgba(200,168,123,0.05);
+            border-radius: 20px;
+            padding-left: 2rem;
+        }
+        .detail-row i {
+            font-size: 2.2rem;
+            width: 3rem;
+            color: #c8a87b;
+        }
+        .contact-action-btn {
+            background: linear-gradient(145deg, #c8a87b, #b38f60);
+            border: none;
+            color: #0a0f1c;
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: 0.2s;
+            box-shadow: 0 6px 14px rgba(200,168,123,0.2);
+        }
+        .contact-action-btn:hover {
+            background: #dcc09e;
+            transform: scale(1.05);
+            color: #000;
+        }
+        /* ----- POLICY & TERMS LIST ----- */
         .policy-list, .terms-list {
             list-style: none;
         }
         .policy-list li, .terms-list li {
-            margin-bottom: 0.9rem;
-            padding-left: 1.7rem;
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
             position: relative;
+            color: #d6dce1;
         }
         .policy-list li:before, .terms-list li:before {
-            content: "▹";
-            color: #1f9eb5;
+            content: "✦";
+            color: #c8a87b;
             font-weight: 700;
             position: absolute;
             left: 0;
         }
+        /* ----- FOOTER WITH COPYRIGHT + ADDRESS ----- */
         .footer {
-            background: white;
-            border-top: 1px solid #e0ebef;
-            padding: 2rem 0;
-            margin-top: 2rem;
-            color: #3f5e66;
+            background: #070b12;
+            border-top: 1px solid rgba(200,168,123,0.2);
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+            color: #b6c3cc;
         }
         .footer-flex {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1.2rem;
+            gap: 1.8rem;
         }
         .copyright {
-            font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: #3e6a73;
+            gap: 0.6rem;
+            font-size: 0.98rem;
+            color: #bac8d2;
         }
         .footer-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.2rem;
         }
         .footer-links a {
-            text-decoration: none;
-            color: #2f6a76;
+            color: #c8b69c;
             font-weight: 500;
-            font-size: 0.98rem;
-            transition: 0.2s;
             cursor: pointer;
+            border-bottom: 1px solid transparent;
+            transition: 0.2s;
         }
         .footer-links a:hover {
-            color: #033b46;
+            color: #f0ddc4;
+            border-bottom-color: #c8a87b;
         }
-        .contact-detail-block {
-            background: #f3f8fa;
-            border-radius: 24px;
-            padding: 2rem;
+        .footer-address {
             margin-top: 1.5rem;
-        }
-        .contact-detail-row {
+            padding-top: 1.2rem;
+            border-top: 1px dashed rgba(200,168,123,0.3);
+            font-size: 1rem;
             display: flex;
+            gap: 1rem;
             align-items: center;
-            gap: 1.8rem;
+            color: #aebec7;
+        }
+        .footer-address i {
+            color: #c8a87b;
             font-size: 1.3rem;
-            padding: 1.2rem 1rem;
-            border-bottom: 1px solid #d3e4e9;
         }
-        .contact-detail-row:last-child {
-            border-bottom: none;
-        }
-        .contact-detail-row i {
-            width: 2.2rem;
-            color: #0f6f7c;
-            font-size: 1.8rem;
-        }
-        .page {
-            display: none;
-        }
-        .page.active-page {
-            display: block;
-        }
-        .attribution {
-            margin-top: 2.2rem;
-            font-size: 0.9rem;
-            color: #6f949c;
-            text-align: right;
-            border-top: 1px dashed #c2d6db;
-            padding-top: 1.5rem;
-        }
-        .call-btn, .email-btn {
-            background: #1a7f8c;
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-block;
-        }
-        .call-btn:hover, .email-btn:hover {
-            background: #0e5f6b;
-        }
-        @media (max-width: 700px) {
-            .wrapper { padding: 0 1.2rem; }
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 900px) {
             .header-flex { flex-direction: column; gap: 1rem; }
-            nav { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
-            .hero-name { font-size: 2.8rem; }
-            .hero-card { padding: 2rem 1.5rem; }
-            .contact-badge-grid { flex-direction: column; gap: 1rem; }
-            .contact-item { width: 100%; }
-            .page-card { padding: 1.8rem; }
+            nav { gap: 1.5rem; }
+            .hero-name { font-size: 3.5rem; }
+            .hero-role { font-size: 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .wrapper { padding: 0 1.2rem; }
+            .hero-realestate { padding: 2.5rem 1.5rem; }
+            .contact-grid-hero { flex-direction: column; }
         }
     </style>
+    <!-- AOS CSS (already above) -->
 </head>
 <body>
     <header>
         <div class="wrapper header-flex">
             <div class="logo-area" id="home-logo">
                 <span class="brand-name">VASU</span>
-                <span class="brand-tag">HikeLetter</span>
+                <span class="brand-tag">Estates</span>
             </div>
             <nav>
                 <a class="nav-link active" data-page="home">Home</a>
@@ -314,244 +408,256 @@
     </header>
 
     <div class="wrapper main-content">
-        <!-- HOME PAGE -->
+        <!-- ========== HOME PAGE — REAL ESTATE LUXURY ========== -->
         <div id="home" class="page active-page">
-            <div class="hero-card">
+            <div class="hero-realestate" data-aos="fade-up" data-aos-duration="1000">
+                <span class="estate-badge"><i class="fas fa-crown" style="margin-right: 8px;"></i> PREMIUM PROPERTIES</span>
                 <div class="hero-name">VASU</div>
-                <div class="hero-role">Sales · HikeLetter</div>
-                <div class="contact-badge-grid">
-                    <div class="contact-item">
+                <div class="hero-role">Real Estate Advisor</div>
+                <!-- NEW EMAIL & PHONE + ADDRESS in HERO -->
+                <div class="contact-grid-hero">
+                    <div class="hero-contact-item" data-aos="zoom-in" data-aos-delay="100">
                         <i class="fas fa-phone-alt"></i>
                         <a href="tel:9381912361">9381912361</a>
                     </div>
-                    <div class="contact-item">
+                    <div class="hero-contact-item" data-aos="zoom-in" data-aos-delay="200">
                         <i class="fas fa-envelope"></i>
-                        <a href="mailto:sales@hikeletter.com">sales@hikeletter.com</a>
+                        <a href="mailto:vasu.leeautomations@gmail.com">vasu.leeautomations</a>
                     </div>
                 </div>
-                <p style="margin-top: 2rem; font-size: 1.2rem; color: #2a5c66;">
-                    <i class="fas fa-bolt" style="color: #1c9eb3;"></i> Official sales contact — reach out for partnerships, inquiries & support
+                <!-- FULL ADDRESS as requested -->
+                <div class="address-block" data-aos="fade-right" data-aos-delay="300">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="address-text">
+                        1-23-228, BRUNDAVAN NAGAR, BHOODEVI NAGAR,<br>
+                        Alwal, Rangareddi, Andhra
+                    </div>
+                </div>
+                <p style="margin-top: 2.2rem; font-size: 1.3rem; color: #e9dfd1;" data-aos="fade-up" data-aos-delay="350">
+                    <i class="fas fa-gem" style="color: #c8a87b;"></i> Your trusted partner for luxury homes, premium plots & investment consulting.
                 </p>
             </div>
-            <div class="page-card">
-                <h2><i class="fas fa-briefcase" style="color: #1c7c8c; margin-right: 10px;"></i> Vasu @ HikeLetter</h2>
-                <p style="font-size: 1.2rem; font-weight: 400;">Dedicated sales representative. Fast response, business hours. Based in India.</p>
-                <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.8rem;">
-                    <span style="background: #e0f0f3; padding: 0.4rem 1.2rem; border-radius: 30px;">
-                        <i class="fas fa-check-circle" style="color: #1c7c8c;"></i> Verified contact
-                    </span>
-                    <span style="background: #e0f0f3; padding: 0.4rem 1.2rem; border-radius: 30px;">
-                        <i class="fas fa-clock"></i> Reply within 4 hrs
-                    </span>
+            <!-- elegant feature cards -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div class="page-card" data-aos="flip-up" data-aos-delay="100" style="padding: 2rem; text-align: center;">
+                    <i class="fas fa-building" style="font-size: 2.8rem; color: #c8a87b; margin-bottom: 1rem;"></i>
+                    <h3 style="color:#f0e2cf; font-size:1.8rem;">Premium</h3>
+                    <p style="color:#cbd5e1;">Luxury villas, penthouses and gated community projects.</p>
+                </div>
+                <div class="page-card" data-aos="flip-up" data-aos-delay="200" style="padding: 2rem; text-align: center;">
+                    <i class="fas fa-tree" style="font-size: 2.8rem; color: #c8a87b; margin-bottom: 1rem;"></i>
+                    <h3 style="color:#f0e2cf; font-size:1.8rem;">Plots</h3>
+                    <p style="color:#cbd5e1;">Prime land in Alwal, Rangareddi and across Andhra.</p>
+                </div>
+                <div class="page-card" data-aos="flip-up" data-aos-delay="300" style="padding: 2rem; text-align: center;">
+                    <i class="fas fa-handshake" style="font-size: 2.8rem; color: #c8a87b; margin-bottom: 1rem;"></i>
+                    <h3 style="color:#f0e2cf; font-size:1.8rem;">Consulting</h3>
+                    <p style="color:#cbd5e1;">Market analysis, legal guidance, investment strategy.</p>
                 </div>
             </div>
         </div>
 
-        <!-- CONTACT PAGE -->
+        <!-- ========== CONTACT PAGE — with NEW EMAIL & ADDRESS ========== -->
         <div id="contact" class="page">
-            <div class="page-card">
-                <h1><i class="fas fa-address-card" style="color: #1c7c8c; margin-right: 12px;"></i> Contact VASU</h1>
-                <p style="font-size: 1.2rem;">Reach out directly — sales & general inquiries.</p>
-                <div class="contact-detail-block">
-                    <div class="contact-detail-row">
+            <div class="page-card contact-luxury" data-aos="fade-up">
+                <h1><i class="fas fa-address-card" style="color: #c8a87b; margin-right: 15px;"></i> Connect with VASU</h1>
+                <p style="font-size: 1.3rem; color: #e0d3c2;">Your real estate gateway — reach out now.</p>
+                
+                <div style="margin-top: 2.8rem;">
+                    <!-- Phone -->
+                    <div class="detail-row" data-aos="fade-right">
                         <i class="fas fa-mobile-alt"></i>
                         <div style="flex:1;">
-                            <div style="font-weight: 700; font-size: 1.5rem; color: #144a55;">9381912361</div>
-                            <span style="font-size: 1rem; color: #3d727d;">
-                                <i class="fas fa-check-circle" style="color: #2496a8;"></i> Mobile / WhatsApp
-                            </span>
+                            <div style="font-weight: 700; font-size: 1.8rem; color: #f0e2cf;">9381912361</div>
+                            <span style="color: #b9c7ce;">Direct line · WhatsApp</span>
                         </div>
-                        <a href="tel:9381912361" class="call-btn">
-                            <i class="fas fa-phone"></i> Call
-                        </a>
+                        <a href="tel:9381912361" class="contact-action-btn"><i class="fas fa-phone"></i> Call</a>
                     </div>
-                    <div class="contact-detail-row">
+                    <!-- NEW EMAIL (updated) -->
+                    <div class="detail-row" data-aos="fade-right" data-aos-delay="100">
                         <i class="fas fa-envelope-open-text"></i>
                         <div style="flex:1;">
-                            <div style="font-weight: 700; font-size: 1.5rem; color: #144a55;">sales@hikeletter.com</div>
-                            <span style="font-size: 1rem; color: #3d727d;">Official sales email</span>
+                            <div style="font-weight: 700; font-size: 1.6rem; color: #f0e2cf; word-break: break-all;">vasu.leeautomations@gmail.com</div>
+                            <span style="color: #b9c7ce;">Official email · 24h response</span>
                         </div>
-                        <a href="mailto:sales@hikeletter.com" class="email-btn">
-                            <i class="fas fa-envelope"></i> Email
-                        </a>
+                        <a href="mailto:vasu.leeautomations@gmail.com" class="contact-action-btn"><i class="fas fa-envelope"></i> Email</a>
+                    </div>
+                    <!-- FULL ADDRESS displayed prominently -->
+                    <div class="detail-row" data-aos="fade-right" data-aos-delay="150">
+                        <i class="fas fa-map-pin"></i>
+                        <div style="flex:1;">
+                            <div style="font-weight: 600; font-size: 1.4rem; color: #f0e2cf;">1-23-228, BRUNDAVAN NAGAR</div>
+                            <div style="color: #cfdbe3; font-size: 1.1rem;">BHOODEVI NAGAR, Alwal, Rangareddi, Andhra</div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Alwal+Rangareddi+Andhra" target="_blank" class="contact-action-btn" style="background: #3a4758; color:white;"><i class="fas fa-location-dot"></i> Map</a>
                     </div>
                 </div>
-                <div style="background: #f2f5f6; border-radius: 20px; padding: 1.8rem; margin-top: 2rem;">
-                    <i class="fas fa-building" style="color: #1f7a88;"></i> 
-                    <strong>HikeLetter</strong> — Vasu handles corporate sales, bulk inquiries, and partnership opportunities.
-                    <div style="margin-top: 0.8rem;">📍 India (IST, GMT+5:30)</div>
+                
+                <div style="background: rgba(0,0,0,0.25); border-radius: 28px; padding: 2rem; margin-top: 2.5rem; border:1px solid #c8a87b30;" data-aos="fade-up">
+                    <i class="fas fa-building" style="color: #d8bf9a; font-size: 1.8rem;"></i>
+                    <strong style="color: #eadbc5; font-size: 1.4rem; margin-left: 0.5rem;">HikeLetter · Lee Automations</strong>
+                    <p style="margin-top: 0.8rem; color: #ced9df;">Vasu leads real estate sales for premium properties in Alwal, Rangareddi and across Andhra. Site visits, legal clearances, and personalized consultation.</p>
                 </div>
             </div>
         </div>
 
-        <!-- PRIVACY POLICY PAGE -->
+        <!-- ========== PRIVACY POLICY PAGE (updated with real estate context) ========== -->
         <div id="privacy" class="page">
-            <div class="page-card">
-                <h1><i class="fas fa-shield-alt" style="color: #1c7c8c;"></i> Privacy Policy</h1>
-                <p><strong>Effective date:</strong> January 2025</p>
-                <p>VASU ("we", "I", "me") operates the sales contact line and email sales@hikeletter.com. This page informs you of policies regarding collection, use, and disclosure of personal data when you contact VASU.</p>
-                
-                <h2>1. Information Collection</h2>
+            <div class="page-card" data-aos="fade-up">
+                <h1><i class="fas fa-shield-hal" style="color: #c8a87b;"></i> Privacy Policy</h1>
+                <p style="color: #d0dbe3;"><strong>Effective:</strong> March 2026</p>
+                <p>VASU Real Estate respects your privacy. This policy explains how we handle your data when you inquire about properties, plots, or consulting.</p>
+                <h2 class="estate-highlight">1. Information we collect</h2>
                 <ul class="policy-list">
-                    <li><strong>Contact details:</strong> phone number, email address, name and any information you provide in messages.</li>
-                    <li><strong>Usage data:</strong> may include timestamps, IP address when you visit this website (anonymized).</li>
-                    <li>No cookies or tracking are used except essential logs.</li>
+                    <li>Name, phone, email, and address you provide (e.g., when you contact us via <strong>vasu.leeautomations@gmail.com</strong> or phone).</li>
+                    <li>Property preferences and budget details shared voluntarily.</li>
+                    <li>Anonymous site visit data (no cookies).</li>
                 </ul>
-                
-                <h2>2. Use of Data</h2>
+                <h2 class="estate-highlight">2. How we use your information</h2>
                 <ul class="policy-list">
-                    <li>To respond to your sales inquiries and provide support for HikeLetter products.</li>
-                    <li>To maintain a professional communication record.</li>
-                    <li>We do <strong>not</strong> sell or share your data with third parties for marketing.</li>
+                    <li>To show you relevant properties, arrange site visits, and assist in transactions.</li>
+                    <li>To communicate updates on new listings in Alwal, Rangareddi, Andhra.</li>
+                    <li>We never sell or rent your personal data.</li>
                 </ul>
-                
-                <h2>3. Data Retention</h2>
-                <p>Your contact information and correspondence are retained as long as necessary to fulfill the purposes outlined, or as required by law. If you wish to request deletion, please contact us directly.</p>
-                
-                <h2>4. Your Rights</h2>
-                <p>You have the right to access, correct, or delete your personal data held by us. To exercise these rights, please reach out via the contact page.</p>
-                
-                <h2>5. Changes</h2>
-                <p>This policy may be updated occasionally. The latest version will always be posted here.</p>
-                <div class="attribution">VASU · HikeLetter sales</div>
+                <h2 class="estate-highlight">3. Data retention & rights</h2>
+                <p>We retain your data as needed for real estate services. You may request deletion anytime by emailing us.</p>
+                <div class="attribution" style="color:#b1c4cc;">VASU · Estates Division</div>
             </div>
         </div>
 
-        <!-- TERMS AND CONDITIONS PAGE -->
+        <!-- ========== TERMS AND CONDITIONS ========== -->
         <div id="terms" class="page">
-            <div class="page-card">
-                <h1><i class="fas fa-file-contract" style="color: #1c7c8c;"></i> Terms & Conditions</h1>
-                <p>By contacting VASU or using the sales email/phone, you agree to the following terms.</p>
-                
-                <h2>1. Sales & Inquiries</h2>
+            <div class="page-card" data-aos="fade-up">
+                <h1><i class="fas fa-file-signature" style="color: #c8a87b;"></i> Terms of Service</h1>
+                <p>By contacting VASU or using our real estate services, you accept these terms.</p>
+                <h2 class="estate-highlight">1. Property inquiries</h2>
                 <ul class="terms-list">
-                    <li>All communication is for legitimate business purposes regarding HikeLetter services.</li>
-                    <li>Quotes, prices, and offers are non-binding until confirmed in writing.</li>
+                    <li>All information about properties is subject to change without notice.</li>
+                    <li>We act as consultants; final agreements are between buyer and seller.</li>
                 </ul>
-                
-                <h2>2. Accuracy</h2>
+                <h2 class="estate-highlight">2. Accuracy</h2>
                 <ul class="terms-list">
-                    <li>You agree to provide accurate contact information when making inquiries.</li>
-                    <li>VASU is not liable for misdirected messages due to incorrect details.</li>
+                    <li>We strive for accurate listings but do not guarantee error-free descriptions.</li>
+                    <li>You must verify property details independently.</li>
                 </ul>
-                
-                <h2>3. Intellectual Property</h2>
-                <ul class="terms-list">
-                    <li>Any materials shared (brochures, pricing) remain the property of HikeLetter / VASU.</li>
-                    <li>You may not redistribute commercial information without consent.</li>
-                </ul>
-                
-                <h2>4. Limitation of Liability</h2>
-                <p>In no event shall VASU be liable for any indirect, incidental, or consequential damages arising out of the use of this contact page or delay in response.</p>
-                
-                <h2>5. Governing Law</h2>
-                <p>These terms are governed by the laws of India, without regard to conflict of law provisions.</p>
-                
-                <h2>6. Changes</h2>
-                <p>We reserve the right to modify these terms. Continued engagement implies acceptance of the latest version.</p>
-                <p style="margin-top: 2rem;"><i class="fas fa-handshake" style="color: #1f9eb5;"></i> For any clarification, contact VASU directly.</p>
+                <h2 class="estate-highlight">3. Limitation of liability</h2>
+                <p>VASU shall not be liable for any indirect losses arising from property transactions or delays.</p>
+                <h2 class="estate-highlight">4. Contact & governing law</h2>
+                <p>Email: vasu.leeautomations@gmail.com · Jurisdiction: Andhra Pradesh, India.</p>
+                <p style="margin-top: 2rem;"><i class="fas fa-balance-scale" style="color: #c8a87b;"></i> Updated 2026</p>
             </div>
         </div>
     </div>
 
+    <!-- ========== FOOTER with COPYRIGHT, ADDRESS, LINKS ========== -->
     <footer class="footer">
-        <div class="wrapper footer-flex">
-            <div class="copyright">
-                <i class="far fa-copyright"></i> <span id="current-year"></span> VASU — sales representative for HikeLetter. All rights reserved.
+        <div class="wrapper">
+            <div class="footer-flex">
+                <div class="copyright">
+                    <i class="far fa-copyright"></i> <span id="current-year"></span> VASU Real Estate — HikeLetter & Lee Automations. All rights reserved.
+                </div>
+                <div class="footer-links">
+                    <a class="footer-nav-link" data-page="privacy">Privacy</a>
+                    <a class="footer-nav-link" data-page="terms">Terms</a>
+                    <a class="footer-nav-link" data-page="contact">Contact</a>
+                </div>
             </div>
-            <div class="footer-links">
-                <a class="footer-nav-link" data-page="privacy">Privacy</a>
-                <a class="footer-nav-link" data-page="terms">Terms</a>
-                <a class="footer-nav-link" data-page="contact">Contact</a>
+            <!-- Full address in footer as well for consistency -->
+            <div class="footer-address">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>1-23-228, BRUNDAVAN NAGAR, BHOODEVI NAGAR, Alwal, Rangareddi, Andhra · </span>
+                <span style="margin-left: 5px;"><i class="fas fa-phone"></i> 9381912361 · </span>
+                <span style="margin-left: 5px;"><i class="fas fa-envelope"></i> vasu.leeautomations@gmail.com</span>
             </div>
-        </div>
-        <div class="wrapper" style="margin-top: 0.8rem; font-size: 0.9rem; color: #628e97;">
-            <span><i class="fas fa-phone"></i> 9381912361  ·  <i class="fas fa-envelope"></i> sales@hikeletter.com</span>
         </div>
     </footer>
 
+    <!-- AOS animation library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         (function() {
             "use strict";
-            
-            // Set copyright year
+            // Initialize AOS animations
+            AOS.init({
+                once: true,
+                duration: 800,
+                offset: 20,
+                easing: 'ease-in-out'
+            });
+
+            // Set current year in copyright
             document.getElementById('current-year').innerText = new Date().getFullYear();
-            
-            // Get all pages
+
+            // ------ PAGE NAVIGATION ------
             const pages = {
                 home: document.getElementById('home'),
                 contact: document.getElementById('contact'),
                 privacy: document.getElementById('privacy'),
                 terms: document.getElementById('terms')
             };
-            
-            // Get all navigation links
+
             const navLinks = document.querySelectorAll('.nav-link');
             const footerNavLinks = document.querySelectorAll('.footer-nav-link');
             const homeLogo = document.getElementById('home-logo');
-            
-            // Function to switch pages
+
             function activatePage(pageId) {
-                // Hide all pages
-                Object.values(pages).forEach(page => {
-                    if (page) page.classList.remove('active-page');
+                // hide all pages
+                Object.values(pages).forEach(p => {
+                    if(p) p.classList.remove('active-page');
                 });
-                
-                // Show selected page
-                if (pages[pageId]) {
-                    pages[pageId].classList.add('active-page');
-                }
-                
-                // Update active state in header navigation
+                // show selected
+                if(pages[pageId]) pages[pageId].classList.add('active-page');
+
+                // update active class on header nav
                 navLinks.forEach(link => {
                     const dataPage = link.getAttribute('data-page');
-                    if (dataPage === pageId) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
+                    if(dataPage === pageId) link.classList.add('active');
+                    else link.classList.remove('active');
                 });
-                
-                // Scroll to top
+
+                // refresh AOS (for new page content)
+                setTimeout(() => { AOS.refresh(); }, 150);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            
-            // Add click listeners to header navigation
+
+            // header nav click
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const pageId = this.getAttribute('data-page');
-                    if (pageId) activatePage(pageId);
+                    const page = this.getAttribute('data-page');
+                    if(page) activatePage(page);
                 });
             });
-            
-            // Add click listeners to footer navigation
+
+            // footer nav click
             footerNavLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const pageId = this.getAttribute('data-page');
-                    if (pageId) activatePage(pageId);
+                    const page = this.getAttribute('data-page');
+                    if(page) activatePage(page);
                 });
             });
-            
-            // Add click listener to logo area (home)
-            if (homeLogo) {
+
+            // logo click -> home
+            if(homeLogo) {
                 homeLogo.addEventListener('click', function() {
                     activatePage('home');
                 });
             }
-            
-            // Make sure phone and email links work properly
-            // All tel: and mailto: links work natively
-            
-            // Initial active state check - ensure home is active on page load
-            const currentHash = window.location.hash.substring(1);
-            if (currentHash && pages[currentHash]) {
-                activatePage(currentHash);
-            } else {
-                activatePage('home');
-            }
+
+            // initial active check: home
+            activatePage('home');
+
+            // force AOS refresh after fonts load etc
+            window.addEventListener('load', function() {
+                AOS.refresh();
+            });
         })();
     </script>
+    <!-- note: all requested elements: 
+         - address 1-23-228 BRUNDAVAN NAGAR BHOODEVI NAGAR Alwal Rangareddi Andhra
+         - changed email: vasu.leeautomations@gmail.com
+         - real estate theme, animations, modern effects, copyright, privacy, terms, contact
+    -->
 </body>
 </html>
